@@ -103,6 +103,10 @@ h2 {
   font-size: 36px;
 }
 
+.new-task span {
+  color: #F3477A;
+}
+
 .new-task button {
   font-weight: 400;
   font-size: 12px;

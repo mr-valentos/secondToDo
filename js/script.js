@@ -166,3 +166,13 @@ function deliteAllComp(event){
 function returnTask(event){
     currentTaskList.append(event)
 }
+
+
+
+let counter = document.querySelector('h1>span');
+counter.innerHTML = allCurentTask.length;
+
+document.addEventListener('click', function() {
+    counter.innerHTML = colection.length;
+});
+
