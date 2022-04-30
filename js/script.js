@@ -32,13 +32,14 @@ function copyValue(event){
     createNewTask();
 };
 
-let currentTaskList = document.forms.currentTaskList;
+// let currentTaskList = document.forms.currentTaskList;
+const currentTaskList = document.querySelector('.current-task__list');
 
 function createNewTask(){
     if(inputValue){
         currentTaskList.insertAdjacentHTML(
             'beforeend',
-            `<div class="list-item">
+            `<div class="list-item" draggable="true">
                 <label for="">${inputValue}</label>
                 <div class="item__create_date">Created:${creatDate}</div>
                 <button type="button" class="item__status">
@@ -88,6 +89,7 @@ function changeStatus(event){
 
 function removeTask(event){
     complitedElement = event.parentElement;
+    complitedElement.removeAttribute("draggable");
     // add return element
     complitedElement.insertAdjacentHTML(
         'beforeend',
@@ -132,6 +134,7 @@ function removeAllTask(){
 function removeAllTask2(){
     let colectionArr = Array.from(colection);
     for (let item of colectionArr){
+        item.removeAttribute("draggable");
         doneTaskList.append(item);};
     
     console.log(colectionArr);
@@ -164,7 +167,8 @@ function deliteAllComp(event){
 };
 
 function returnTask(event){
-    currentTaskList.append(event)
+    event.setAttribute("draggable", "true");
+    currentTaskList.append(event);
 }
 
 
@@ -172,7 +176,7 @@ function returnTask(event){
 const counter = document.querySelector('h1>span');
 const progressValue = document.querySelector('progress');
 
-counter.innerHTML = allCurentTask.length;
+counter.innerHTML = colection.length;
 
 document.addEventListener('click', () => {
     counter.innerHTML = colection.length;
@@ -191,8 +195,64 @@ function progress(){
     if (complitedColection.length == 0){
         proc = 0
     }
-    console.log(proc);
+    // console.log(proc);
     progressValue.setAttribute('value', proc);
     // return proc;
 }
 progress()
+
+
+
+const draggables = document.getElementsByClassName('list-item');
+const liveContainer = document.getElementsByClassName('current-task__list');
+const dropContainer = liveContainer[0];
+
+console.log(dropContainer)
+
+document.addEventListener('click', () => {
+    for (let drag of draggables){
+    
+        drag.addEventListener('dragstart', () => {
+            drag.classList.add('dragging')
+        })
+        drag.addEventListener('dragend', () => {
+            drag.classList.remove('dragging')
+        })  
+    }
+})
+
+
+
+// draggables.forEach(drag => {
+//     drag.addEventListener('dragstart', () => {
+//         drag.classList.add('dragging')
+//     })
+//     drag.addEventListener('dragend', () => {
+//         drag.classList.remove('dragging')
+//     })
+// });
+
+dropContainer.addEventListener('dragover', e => {
+    e.preventDefault();
+    // console.log('drag over')
+    const afterElement = getDragAfterElement(dropContainer, e.clientY);
+    console.log(afterElement);
+    const drag = document.querySelector('.dragging');
+    dropContainer.insertBefore(drag, afterElement);
+    // dropContainer.appendChild(drag);
+})
+
+function getDragAfterElement(dropContainer, y){
+    const draggableElement = [...dropContainer.querySelectorAll('.list-item:not(.dragging)')];
+
+    return draggableElement.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    
+    if (offset < 0 &&  offset > closest.offset){
+        return { offset: offset, element: child }      
+    } else {
+        return closest
+    }
+    }, { offset: Number.NEGATIVE_INFINITY }).element
+}

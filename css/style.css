@@ -258,3 +258,7 @@ progress.styled::-moz-progress-bar {
   background-image: linear-gradient(green, lime);
   border-radius: 6px;
 }
+
+.list-item.dragging {
+  opacity: 0.5;
+}
