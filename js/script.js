@@ -130,15 +130,18 @@ function removeAllTask(){
     // });
 };
 function removeAllTask2(){
-    // for (let item of colection){
-        // doneTaskList.append(item);};
-    console.log(colection);
+    let colectionArr = Array.from(colection);
+    for (let item of colectionArr){
+        doneTaskList.append(item);};
+    
+    console.log(colectionArr);
     // doneTaskList.append(colection);
 };
 
 
 const complitedTask = document.querySelector('.done-task');
-let complitedTaskItems = document.getElementsByClassName('done-task__list');
+
+let complitedColection = complitedTask.getElementsByClassName('list-item');
 let returnedElement;
 
 complitedTask.addEventListener('click', deliteAllComp);
@@ -147,7 +150,9 @@ function deliteAllComp(event){
     let returnBtn = event.target.closest('.return-btn')
     
     if (event.target.closest('.delete-All')){
-        for (let items of complitedTaskItems){
+        let conmplitedArr = Array.from(complitedColection);
+        for (let items of conmplitedArr){
+            console.log(items);
             items.remove();
         }
     }
