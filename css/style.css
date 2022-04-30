@@ -232,3 +232,29 @@ h2 {
   margin-top: 28px;
   opacity: 0.3;
 }
+
+progress.styled {
+  display: block;
+  border-radius: 6px;
+  width: 80%;
+  height: 22px;
+  border: 1px solid #e8c00e;
+}
+
+progress.styled::-webkit-progress-bar {
+  background-color: beige;
+  border-radius: 6px;
+}
+
+progress.styled::-webkit-progress-value {
+  background-color: green;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(green), to(lime));
+  background-image: linear-gradient(green, lime);
+  border-radius: 6px;
+}
+
+progress.styled::-moz-progress-bar {
+  background-color: green;
+  background-image: linear-gradient(green, lime);
+  border-radius: 6px;
+}

@@ -169,10 +169,30 @@ function returnTask(event){
 
 
 
-let counter = document.querySelector('h1>span');
+const counter = document.querySelector('h1>span');
+const progressValue = document.querySelector('progress');
+
 counter.innerHTML = allCurentTask.length;
 
-document.addEventListener('click', function() {
+document.addEventListener('click', () => {
     counter.innerHTML = colection.length;
+
+    progress();
 });
 
+function progress(){
+    let proc; 
+    if (complitedColection.length > 0 && colection.length > 0){
+    proc = (complitedColection.length * 100) / (complitedColection.length + colection.length);
+    } 
+    if (colection.length == 0) {
+        proc = 100;
+    }
+    if (complitedColection.length == 0){
+        proc = 0
+    }
+    console.log(proc);
+    progressValue.setAttribute('value', proc);
+    // return proc;
+}
+progress()
