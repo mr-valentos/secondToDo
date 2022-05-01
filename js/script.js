@@ -30,6 +30,7 @@ function copyValue(event){
 
     invForm.classList.remove('active');
     createNewTask();
+    invisibleInput.value = "";
 };
 
 // let currentTaskList = document.forms.currentTaskList;
@@ -40,7 +41,7 @@ function createNewTask(){
         currentTaskList.insertAdjacentHTML(
             'beforeend',
             `<div class="list-item" draggable="true">
-                <label for="">${inputValue}</label>
+                <h3>${inputValue}</h3>
                 <div class="item__create_date">Created:${creatDate}</div>
                 <button type="button" class="item__status">
                     <span>Start</span>
@@ -49,10 +50,19 @@ function createNewTask(){
                 <button type="button" class="item__comlite">Complited</button>
             </div>`
         );
+        addEventFun()
     }
 };
 
-
+function addEventFun(){
+    let drag = currentTaskList.lastChild;
+    drag.addEventListener('dragstart', () => {
+        drag.classList.add('dragging')
+    })
+    drag.addEventListener('dragend', () => {
+        drag.classList.remove('dragging')
+    })  
+}
 
 
 let complitedElement;
@@ -100,7 +110,6 @@ function removeTask(event){
 }
 
 let allCurentTask = document.getElementsByClassName('current-task__list');
-
 let colection = currentTask.getElementsByClassName('list-item');
 
 
@@ -209,17 +218,17 @@ const dropContainer = liveContainer[0];
 
 console.log(dropContainer)
 
-document.addEventListener('click', () => {
-    for (let drag of draggables){
+// document.addEventListener('click', () => {
+//     for (let drag of draggables){
     
-        drag.addEventListener('dragstart', () => {
-            drag.classList.add('dragging')
-        })
-        drag.addEventListener('dragend', () => {
-            drag.classList.remove('dragging')
-        })  
-    }
-})
+//         drag.addEventListener('dragstart', () => {
+//             drag.classList.add('dragging')
+//         })
+//         drag.addEventListener('dragend', () => {
+//             drag.classList.remove('dragging')
+//         })  
+//     }
+// })
 
 
 
@@ -236,7 +245,7 @@ dropContainer.addEventListener('dragover', e => {
     e.preventDefault();
     // console.log('drag over')
     const afterElement = getDragAfterElement(dropContainer, e.clientY);
-    console.log(afterElement);
+    // console.log(afterElement);
     const drag = document.querySelector('.dragging');
     dropContainer.insertBefore(drag, afterElement);
     // dropContainer.appendChild(drag);
