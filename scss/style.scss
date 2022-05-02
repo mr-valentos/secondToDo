@@ -29,7 +29,20 @@ h2 {
     display: flex;
     font-weight: 700;
     font-size: 36px;
+    h1 {
+        margin-right: 30px;
+    }
+    span {
+        color: #F3477A;
+    }
+    button:before{
+        content: url(/img/plus-add2.png);
+        position: absolute;
+        left: 22px;
+        top: 8px;
+    }
     button {
+        position: relative;
         font-weight: 400;
         font-size: 12px;
         background: #884CB2;
@@ -45,26 +58,37 @@ h2 {
     align-items: center;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 40%;
     margin-left: -300px;
     width: 600px;
-    height: 50px;
+    min-height: 50px;
     background-color: whitesmoke;
     box-shadow: 0px 4px 40px #8CA4D8;
     border-radius: 15px;
     visibility:hidden;
-    input {
+    textarea {
         width: 400px;
-        height: 30px;
-        background-color: transparent;
+        min-height: 30px;
+        background-color: whitesmoke;
         box-shadow: 2px 2px 2px 2px #8CA4D8;
         border-radius: 5px;
+    }
+    button {
+        position: relative;
+        font-weight: 400;
+        font-size: 12px;
+        background: #884CB2;
+        border-radius: 10px;
+        width: 80px;
+        height: 34px;
+        color: white;
     }
     
 }
 .invisible-form.active {
     visibility: visible;
     animation: newTaskAnimation 1s;
+    z-index: 1;
 }
 @keyframes newTaskAnimation {
     0%{
@@ -100,14 +124,43 @@ h2 {
 .list-item {
     margin-bottom: 36px;
     display: flex;
-    height: 40px;
+    min-height: 40px;
     border-bottom: 1px solid rgba($color: grey, $alpha: 0.5);
+    
     >* {
-        margin-right: 60px;
+        margin-right: 50px;
     }
-    label {
-        min-width: 300px;
+    
+    h3 {
+        width: 500px;
+        
     }
+    h3:before {
+        content: url(/img/Group212.1.png);
+        margin-right: 8px;
+    }
+    .item__create_date {
+        color: #1D262C;
+    }
+    button {
+        width: 77px;
+        height: 18px;
+        border-radius: 9px;
+        font-size: 11px;
+    }
+    button.item__status {
+        background-color: rgba(39, 174, 96, 0.2);
+        color: #27AE60;
+    }
+    button.item__status.active {
+        color: #56CCF2;
+    background-color: rgba(86, 204, 242, 0.2);
+    }
+    .item__comlite {
+        color: #F3477A;
+        background-color: rgba($color: rgb(228, 22, 22), $alpha: 0.3);
+    }
+    
 }
 
 
@@ -125,6 +178,7 @@ h2 {
 }
 .item__status.active > :last-child{
     display: block;
+    
 }
 
 .item__comlite {
@@ -136,4 +190,33 @@ h2 {
     opacity: 0.3;
 }
 .progress {
+}
+
+
+
+progress.styled {
+    display: block;
+    border-radius: 6px;
+    width: 80%;
+    height: 22px;
+    border: 1px solid #e8c00e;
+}
+progress.styled::-webkit-progress-bar {
+    background-color: beige;
+    border-radius: 6px;
+}
+progress.styled::-webkit-progress-value {
+    background-color: green;
+    background-image: linear-gradient(green, lime);
+    border-radius: 6px;
+}
+progress.styled::-moz-progress-bar {
+    background-color: green;
+    background-image: linear-gradient(green, lime);
+    border-radius: 6px;
+}
+
+
+.list-item.dragging {
+    opacity: 0.5;
 }
