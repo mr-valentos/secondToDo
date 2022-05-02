@@ -7,6 +7,7 @@ document.addEventListener('click', newTaskWindow);
 function newTaskWindow (event) {
     if(event.target.closest('.new-task_bnt')){
         invForm.classList.toggle('active');
+        invisibleInput.focus();
     }
     if(!event.target.closest('.new-task') && !event.target.closest('.invisible-form')){
         invForm.classList.remove('active');
@@ -189,22 +190,20 @@ counter.innerHTML = colection.length;
 
 document.addEventListener('click', () => {
     counter.innerHTML = colection.length;
-
+    checkListFn();
     progress();
 });
 
 function progress(){
     let proc; 
     if (complitedColection.length > 0 && colection.length > 0){
-    proc = (complitedColection.length * 100) / (complitedColection.length + colection.length);
+        proc = (complitedColection.length * 100) / (complitedColection.length + colection.length);
     } 
-    if (colection.length == 0) {
-        proc = 100;
-    }
+    
     if (complitedColection.length == 0){
-        proc = 0
+        proc = 0;
     }
-    // console.log(proc);
+    console.log(colection.length);
     progressValue.setAttribute('value', proc);
     // return proc;
 }
@@ -265,3 +264,18 @@ function getDragAfterElement(dropContainer, y){
     }
     }, { offset: Number.NEGATIVE_INFINITY }).element
 }
+
+const currentTitle = document.querySelector('.current-task');
+
+function checkListFn() {
+    if (draggables.length == 0) {
+        currentTitle.classList.add('nothing');
+        complitedTask.classList.add('nothing');
+    }
+    if (draggables.length > 0) {
+        currentTitle.classList.remove('nothing');
+        complitedTask.classList.remove('nothing');
+    }
+}
+
+checkListFn();

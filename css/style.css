@@ -101,6 +101,7 @@ h2 {
   display: flex;
   font-weight: 700;
   font-size: 36px;
+  margin-bottom: 40px;
 }
 
 .new-task h1 {
@@ -133,16 +134,15 @@ h2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   position: absolute;
   left: 50%;
   top: 40%;
-  margin-left: -300px;
-  width: 600px;
+  margin-left: -250px;
+  padding: 10px;
+  max-width: 600px;
   min-height: 50px;
   background-color: whitesmoke;
   -webkit-box-shadow: 0px 4px 40px #8CA4D8;
@@ -152,12 +152,14 @@ h2 {
 }
 
 .invisible-form textarea {
+  text-align: center;
+  font-size: 24px;
   width: 400px;
-  min-height: 30px;
   background-color: whitesmoke;
   -webkit-box-shadow: 2px 2px 2px 2px #8CA4D8;
           box-shadow: 2px 2px 2px 2px #8CA4D8;
   border-radius: 5px;
+  margin-right: 10px;
 }
 
 .invisible-form button {
@@ -173,8 +175,8 @@ h2 {
 
 .invisible-form.active {
   visibility: visible;
-  -webkit-animation: newTaskAnimation 1s;
-          animation: newTaskAnimation 1s;
+  -webkit-animation: newTaskAnimation 0.8s;
+          animation: newTaskAnimation 0.8s;
   z-index: 1;
 }
 
@@ -215,10 +217,6 @@ h2 {
   font-size: 10px;
 }
 
-.current-task {
-  margin-top: 40px;
-}
-
 .current-task__list {
   margin-top: 28px;
 }
@@ -230,6 +228,9 @@ h2 {
   display: flex;
   min-height: 40px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .list-item > * {
@@ -237,7 +238,12 @@ h2 {
 }
 
 .list-item h3 {
-  width: 500px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 450px;
+          flex: 1 1 450px;
+  min-width: 200px;
+  overflow-wrap: break-word;
+  margin-bottom: 20px;
 }
 
 .list-item h3:before {
@@ -271,6 +277,88 @@ h2 {
   background-color: rgba(228, 22, 22, 0.3);
 }
 
+@media screen and (max-width: 1310px) {
+  .list-item {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .list-item h3 {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 60%;
+            flex: 0 1 60%;
+  }
+  .list-item .item__create_date {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 20%;
+            flex: 0 1 20%;
+  }
+  .list-item button {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .list-item {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .list-item h3 {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 100%;
+            flex: 0 1 100%;
+  }
+  .list-item button {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .list-item {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .list-item > * {
+    margin: 0px;
+  }
+  .list-item h3 {
+    margin-right: 0px;
+    min-width: 200px;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 100%;
+            flex: 1 1 100%;
+  }
+  .list-item .item__create_date {
+    padding-bottom: 20px;
+  }
+  .list-item button {
+    margin-bottom: 20px;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  .new-task button:before {
+    display: none;
+  }
+  .container {
+    padding: 30px;
+    margin: 30px 20px 0px 20px;
+  }
+  .invisible-form {
+    margin-left: -150px;
+  }
+  .invisible-form textarea {
+    width: 200px;
+  }
+}
+
 .item__status > :last-child {
   display: none;
 }
@@ -286,6 +374,21 @@ h2 {
 .done-task__list {
   margin-top: 28px;
   opacity: 0.3;
+}
+
+.progress {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 18px;
+  color: #1D262C;
 }
 
 progress.styled {
@@ -316,4 +419,8 @@ progress.styled::-moz-progress-bar {
 
 .list-item.dragging {
   opacity: 0.5;
+}
+
+.nothing {
+  display: none;
 }
