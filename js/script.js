@@ -107,6 +107,7 @@ function removeTask(event){
         `<button type="button" class="return-btn">Return</button>`
     );
     // event.parentElement.remove();
+    complitedElement.classList.add('removed');
     doneTaskList.append(complitedElement);
 }
 
@@ -145,6 +146,7 @@ function removeAllTask2(){
     let colectionArr = Array.from(colection);
     for (let item of colectionArr){
         item.removeAttribute("draggable");
+        item.classList.add('removed');
         doneTaskList.append(item);};
     
     console.log(colectionArr);
@@ -178,6 +180,7 @@ function deliteAllComp(event){
 
 function returnTask(event){
     event.setAttribute("draggable", "true");
+    event.classList.remove('removed')
     currentTaskList.append(event);
 }
 
@@ -186,7 +189,7 @@ function returnTask(event){
 const counter = document.querySelector('h1>span');
 const progressValue = document.querySelector('progress');
 
-counter.innerHTML = colection.length;
+
 
 document.addEventListener('click', () => {
     counter.innerHTML = colection.length;
@@ -203,7 +206,7 @@ function progress(){
     if (complitedColection.length == 0){
         proc = 0;
     }
-    console.log(colection.length);
+    // console.log(colection.length);
     progressValue.setAttribute('value', proc);
     // return proc;
 }
@@ -215,7 +218,7 @@ const draggables = document.getElementsByClassName('list-item');
 const liveContainer = document.getElementsByClassName('current-task__list');
 const dropContainer = liveContainer[0];
 
-console.log(dropContainer)
+// console.log(dropContainer)
 
 // document.addEventListener('click', () => {
 //     for (let drag of draggables){
@@ -265,6 +268,76 @@ function getDragAfterElement(dropContainer, y){
     }, { offset: Number.NEGATIVE_INFINITY }).element
 }
 
+
+
+
+// const itemsArrey = [];
+const allItems = document.getElementsByClassName('list-item');
+
+window.addEventListener("unload", local);
+
+function local(){
+    
+    const itemsArrey = [];
+    for (let i of allItems) {
+        let value = i.querySelector('h3')
+        let created = i.querySelector('.item__create_date')
+        let itemStatus = i.querySelector('.item__status')
+        let itemClass = i.className
+
+        itemsArrey.push({
+            task: value.textContent,
+            created: created.textContent,
+            itemStatus: itemStatus.className,
+            itemClass: itemClass,
+        })
+        
+    }
+    toStorege(itemsArrey)
+    // console.log(itemsArrey);
+
+}
+
+function toStorege(arr){
+    localStorage.setItem( 'colectionAr' , JSON.stringify(arr));
+}
+
+
+
+
+const fromStorage = localStorage.getItem('colectionAr');
+const parseColection = JSON.parse(fromStorage)
+if (parseColection) {
+    for (let item of parseColection){
+        currentTaskList.insertAdjacentHTML(
+            'beforeend',
+            `<div class="${item.itemClass}" draggable="true">
+                <h3>${item.task}</h3>
+                <div class="item__create_date">${item.created}</div>
+                <button type="button" class="${item.itemStatus}">
+                    <span>Start</span>
+                    <span>In Process</span>
+                </button>
+                <button type="button" class="item__comlite">Complited</button>
+            </div>`
+        );
+        addEventFun()
+    }
+}
+console.log(parseColection)
+localStorage.clear()
+
+
+const checkComplitedTask = document.querySelectorAll('.list-item')
+for (let item of checkComplitedTask){
+    if (item.classList.contains('removed')){
+        item.classList.remove('removed')
+        removeTask(item.lastChild)
+    }
+}
+
+
+
 const currentTitle = document.querySelector('.current-task');
 
 function checkListFn() {
@@ -279,3 +352,5 @@ function checkListFn() {
 }
 
 checkListFn();
+
+counter.innerHTML = colection.length;
