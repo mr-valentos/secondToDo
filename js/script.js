@@ -210,7 +210,7 @@ function progress(){
     progressValue.setAttribute('value', proc);
     // return proc;
 }
-progress()
+
 
 
 
@@ -321,7 +321,7 @@ if (parseColection) {
                 <button type="button" class="item__comlite">Complited</button>
             </div>`
         );
-        addEventFun()
+        addEventFun();
     }
 }
 console.log(parseColection)
@@ -352,5 +352,5 @@ function checkListFn() {
 }
 
 checkListFn();
-
+progress();
 counter.innerHTML = colection.length;
