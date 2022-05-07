@@ -339,15 +339,19 @@ for (let item of checkComplitedTask){
 
 
 const currentTitle = document.querySelector('.current-task');
+const progressBlock = document.querySelector('.progress');
+
 
 function checkListFn() {
     if (draggables.length == 0) {
         currentTitle.classList.add('nothing');
         complitedTask.classList.add('nothing');
+        progressBlock.classList.add('nothing');
     }
     if (draggables.length > 0) {
         currentTitle.classList.remove('nothing');
         complitedTask.classList.remove('nothing');
+        progressBlock.classList.remove('nothing');
     }
 }
 
